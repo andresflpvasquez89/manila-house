@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Granja Santa Fe · Manila House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200;9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#a0884d;--gold-deep:#8a7340;--gold-soft:#c4a668;--cream:#f8f5ee;--paper:#fdfbf6;--ink:#1a1a1f;--ink-soft:#3a3a42;--mute:#7a7468;--line:#d8d2c2;--line-soft:#e8e3d4}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#2a2a30;font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.page{width:210mm;min-height:297mm;background:var(--paper);margin:24px auto;box-shadow:0 24px 64px rgba(0,0,0,.5);page-break-after:always;position:relative;overflow:hidden}
+.page:last-child{page-break-after:auto}
+.page-1{display:grid;grid-template-rows:38mm 1fr}
+.header-bar{padding:14mm 16mm 0;display:flex;justify-content:space-between;align-items:flex-start;position:relative}
+.header-bar::before{content:'';position:absolute;top:14mm;left:16mm;width:18mm;height:1px;background:var(--gold)}
+.brand{padding-top:6mm}
+.brand-name{font-family:'Fraunces',serif;font-weight:300;font-size:18pt;letter-spacing:.04em;color:var(--ink)}
+.brand-name em{font-style:italic;font-weight:400;color:var(--gold)}
+.brand-tag{font-family:'Inter',sans-serif;font-size:7.5pt;letter-spacing:.3em;color:var(--mute);text-transform:uppercase;margin-top:2mm}
+.ref-block{text-align:right;padding-top:6mm}
+.ref-num{font-family:'Fraunces',serif;font-style:italic;font-size:11pt;color:var(--mute)}
+.ref-num strong{color:var(--gold);font-weight:500}
+.ref-loc{font-size:7.5pt;letter-spacing:.25em;color:var(--mute);text-transform:uppercase;margin-top:2mm}
+.hero{padding:0 16mm 16mm;display:grid;grid-template-rows:1fr auto;gap:8mm}
+.hero-image{position:relative;overflow:hidden;min-height:140mm;background:var(--line-soft)}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.rating-badge{position:absolute;bottom:6mm;right:6mm;background:rgba(26,26,31,.85);backdrop-filter:blur(8px);color:var(--paper);padding:3mm 5mm;font-size:8pt;letter-spacing:.15em;text-transform:uppercase}
+.rating-badge strong{font-family:'Fraunces',serif;font-style:italic;font-size:14pt;font-weight:500;color:var(--gold-soft);margin-right:2mm}
+.hero-title-block{display:grid;grid-template-columns:1fr auto;gap:8mm;align-items:end;padding-top:4mm;border-top:1px solid var(--line-soft)}
+.titles{padding-top:6mm}
+.title-es{font-family:'Fraunces',serif;font-weight:300;font-size:36pt;line-height:.95;letter-spacing:-.02em;color:var(--ink)}
+.title-es em{font-style:italic;font-weight:400;color:var(--gold)}
+.title-en{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:11pt;color:var(--mute);margin-top:3mm}
+.price-block{text-align:right;padding-top:6mm}
+.price-label{font-size:7pt;letter-spacing:.25em;color:var(--mute);text-transform:uppercase;margin-bottom:2mm}
+.price-num{font-family:'Fraunces',serif;font-weight:400;font-size:24pt;color:var(--ink);line-height:1}
+.price-currency{font-size:10pt;color:var(--gold);margin-left:1mm}
+.price-unit{font-size:8pt;color:var(--mute);margin-top:1mm}
+.page-2{padding:14mm 16mm;display:flex;flex-direction:column;gap:8mm}
+.section-mark{display:flex;align-items:center;gap:6mm;padding-bottom:4mm;border-bottom:1px solid var(--line-soft)}
+.section-mark-num{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:32pt;color:var(--gold);line-height:1}
+.section-mark-text{flex:1}
+.section-mark-es{font-family:'Fraunces',serif;font-weight:400;font-size:18pt;color:var(--ink);line-height:1}
+.section-mark-en{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:10pt;color:var(--mute);margin-top:2mm}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-soft)}
+.spec{padding:6mm 5mm;border-right:1px solid var(--line-soft);text-align:center}
+.spec:last-child{border-right:none}
+.spec-num{font-family:'Fraunces',serif;font-weight:300;font-size:28pt;color:var(--ink);line-height:1}
+.spec-label-es{font-size:8pt;letter-spacing:.18em;color:var(--mute);text-transform:uppercase;margin-top:3mm}
+.spec-label-en{font-style:italic;font-size:7.5pt;color:var(--gold);margin-top:1mm;font-family:'Fraunces',serif}
+.tagline-block{padding:8mm 0;text-align:center;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.tagline-es{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:16pt;line-height:1.3;color:var(--ink);max-width:140mm;margin:0 auto}
+.tagline-en{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:10pt;color:var(--mute);margin-top:4mm}
+.amenities{display:grid;grid-template-columns:1fr 1fr;gap:10mm;flex:1}
+.amenities-col h4{font-family:'Fraunces',serif;font-weight:500;font-size:11pt;color:var(--gold);margin-bottom:4mm;padding-bottom:2mm;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline}
+.amenities-col h4 em{font-style:italic;font-weight:300;font-size:8pt;color:var(--mute)}
+.amenities-list{list-style:none}
+.amenities-list li{font-family:'Inter',sans-serif;font-size:9.5pt;color:var(--ink-soft);padding:2.5mm 0;border-bottom:1px dotted var(--line-soft);display:flex;align-items:center;gap:3mm}
+.amenities-list li::before{content:'·';color:var(--gold);font-size:14pt;line-height:0}
+.airbnb-link{display:inline-block;margin-top:4mm;padding:3mm 6mm;border:1px solid var(--line);font-size:8pt;color:var(--mute);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:all .2s}
+.airbnb-link:hover{border-color:var(--gold);color:var(--gold)}
+.page-3{padding:14mm 16mm;display:flex;flex-direction:column;gap:8mm}
+.experience-hero{height:90mm;overflow:hidden;position:relative}
+.experience-hero img{border-radius:0}
+.experience{flex:1}
+.exp-text-es{font-family:'Fraunces',serif;font-weight:300;font-size:13pt;line-height:1.6;color:var(--ink-soft);column-count:2;column-gap:8mm;text-align:justify}
+.exp-text-en{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:9pt;line-height:1.5;color:var(--mute);margin-top:5mm;padding-top:5mm;border-top:1px solid var(--line-soft);column-count:2;column-gap:8mm;text-align:justify}
+.cta-footer{background:var(--ink);color:var(--paper);padding:10mm;margin:0 -16mm;display:grid;grid-template-columns:1fr auto;gap:8mm;align-items:center;margin-top:auto}
+.cta-headline{font-family:'Fraunces',serif;font-weight:300;font-size:20pt;line-height:1.1;margin-bottom:3mm}
+.cta-headline em{font-style:italic;color:var(--gold-soft)}
+.cta-sub{font-family:'Fraunces',serif;font-style:italic;font-size:10pt;color:#a8a59a}
+.cta-button{background:var(--gold);color:var(--ink);padding:6mm 10mm;font-family:'Inter',sans-serif;font-weight:600;font-size:11pt;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;text-align:center;border:1px solid var(--gold-soft)}
+.cta-button strong{display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:14pt;text-transform:none;letter-spacing:0;margin-top:2mm}
+.footer-meta{display:flex;justify-content:space-between;padding:6mm 16mm 0;font-size:7.5pt;letter-spacing:.2em;color:var(--mute);text-transform:uppercase;border-top:1px solid var(--line-soft);margin:0 -16mm;padding:6mm 16mm}
+@media print{body{background:white}.page{margin:0;box-shadow:none}.floating-actions{display:none !important}}
+/* Floating action buttons - solo en pantalla */
+.floating-actions{position:fixed;top:20px;right:20px;display:flex;gap:8px;z-index:100}
+.fab{background:rgba(26,26,31,.92);backdrop-filter:blur(12px);color:#f4f1ea;border:1px solid rgba(160,136,77,.35);border-radius:10px;padding:10px 16px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .2s;text-decoration:none}
+.fab:hover{background:#a0884d;color:#fdfbf6;border-color:#a0884d;transform:translateY(-1px)}
+.fab svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.fab-primary{background:#a0884d;color:#fdfbf6;border-color:#a0884d}
+.fab-primary:hover{background:#8a7340;border-color:#8a7340}
+@media(max-width:768px){.floating-actions{top:10px;right:10px;left:10px;justify-content:space-between}.fab{padding:8px 12px;font-size:11px}.fab span{display:none}.fab-primary span{display:inline}}
+</style>
+</head>
+<body>
+<!-- Floating actions (only on screen) -->
+<div class="floating-actions">
+  <a href="manila-house-landing.html" class="fab" title="Volver a Manila House">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Volver</span>
+  </a>
+  <button class="fab" onclick="window.print()" title="Imprimir / Guardar como PDF">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    <span>Guardar PDF</span>
+  </button>
+  <a href="https://wa.me/573007139578?text=%C2%A1Hola%21%20Estoy%20interesado%20en%20Granja%20Santa%20Fe%20de%20Manila%20House.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank" class="fab fab-primary" title="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+    <span>Reservar</span>
+  </a>
+</div>
+<!-- PAGE 1: HERO -->
+<div class="page page-1">
+  <div class="header-bar">
+    <div class="brand">
+      <div class="brand-name">Manila <em>House</em></div>
+      <div class="brand-tag">Curated stays · Medellín</div>
+    </div>
+    <div class="ref-block">
+      <div class="ref-num">No. <strong>09</strong> / 10</div>
+      <div class="ref-loc">Santa Fe Ant.</div>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-image">
+      <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1361167783206300607/original/08f166b0-ef13-4bc2-8ba0-44d4e461bb1d.jpeg?im_w=1200" alt="Granja Santa Fe">
+      <div class="rating-badge" style="background:rgba(160,136,77,.85)"><strong>NEW</strong> Nuevo</div>
+    </div>
+    <div class="hero-title-block">
+      <div class="titles">
+        <div class="title-es">Granja Santa Fe</div>
+        <div class="title-en">Desert farm in Santa Fe de Antioquia with pool and jacuzzi</div>
+      </div>
+      <div class="price-block">
+        <div class="price-label">Desde · From</div>
+        <div class="price-num">$450<span class="price-currency">USD</span></div>
+        <div class="price-unit">/ noche · per night</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PAGE 2: DETAILS -->
+<div class="page page-2">
+  <div class="section-mark">
+    <div class="section-mark-num">I</div>
+    <div class="section-mark-text">
+      <div class="section-mark-es">La propiedad</div>
+      <div class="section-mark-en">The property</div>
+    </div>
+  </div>
+  <div class="specs">
+    <div class="spec"><div class="spec-num">19</div><div class="spec-label-es">Huéspedes</div><div class="spec-label-en">Guests</div></div>
+    <div class="spec"><div class="spec-num">6</div><div class="spec-label-es">Habitaciones</div><div class="spec-label-en">Bedrooms</div></div>
+    <div class="spec"><div class="spec-num">8</div><div class="spec-label-es">Baños</div><div class="spec-label-en">Bathrooms</div></div>
+    <div class="spec"><div class="spec-num">$450</div><div class="spec-label-es">USD / Noche</div><div class="spec-label-en">USD / Night</div></div>
+  </div>
+  <div class="tagline-block">
+    <div class="tagline-es">"Piscina, jacuzzi y naturaleza en el desierto antioqueño — una experiencia única."</div>
+    <div class="tagline-en">"Pool, jacuzzi and nature in the Antioquian desert — a unique experience."</div>
+  </div>
+  <div class="amenities">
+    <div class="amenities-col">
+      <h4>Incluye <em>Includes</em></h4>
+      <ul class="amenities-list"><li>Piscina privada · Private pool</li>
+<li>Jacuzzi · Jacuzzi</li>
+<li>WiFi alta velocidad · High-speed WiFi</li>
+<li>Zona BBQ · BBQ area</li>
+<li>Granja · Farm</li></ul>
+    </div>
+    <div class="amenities-col">
+      <h4>También <em>Also</em></h4>
+      <ul class="amenities-list"><li>Naturaleza · Nature</li>
+<li>Cocina equipada · Full kitchen</li>
+<li>Hamacas · Hammocks</li>
+<li>Parqueadero · Parking</li></ul>
+      <a class="airbnb-link" href="https://es-l.airbnb.com/rooms/1361167783206300607" target="_blank">Ver en Airbnb →</a>
+    </div>
+  </div>
+  
+</div>
+
+<!-- PAGE 3: EXPERIENCE + CTA -->
+<div class="page page-3">
+  <div class="section-mark">
+    <div class="section-mark-num">II</div>
+    <div class="section-mark-text">
+      <div class="section-mark-es">La experiencia</div>
+      <div class="section-mark-en">The experience</div>
+    </div>
+  </div>
+  <div class="experience-hero">
+    <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1361167783206300607/original/08f166b0-ef13-4bc2-8ba0-44d4e461bb1d.jpeg?im_w=1200" alt="Granja Santa Fe" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <div class="experience">
+    <div class="exp-text-es">Granja en el desierto de Santa Fe de Antioquia con piscina y jacuzzi. 6 habitaciones, 19 camas, 8 baños. Una experiencia campestre colombiana única.</div>
+    <div class="exp-text-en">Desert farm in Santa Fe de Antioquia with pool and jacuzzi. 6 bedrooms, 19 beds, 8 baths. A unique Colombian countryside experience.</div>
+  </div>
+  <div class="cta-footer">
+    <div class="cta-text">
+      <div class="cta-headline">¿Listos para <em>reservar</em>?</div>
+      <div class="cta-sub">Ready to book? Direct booking, best price.</div>
+    </div>
+    <a class="cta-button" href="https://wa.me/573007139578?text=%C2%A1Hola%21%20Estoy%20interesado%20en%20Granja%20Santa%20Fe%20de%20Manila%20House.%20%C2%BFEst%C3%A1%20disponible%3F" target="_blank">
+      WhatsApp
+      <strong>+57 300 713 9578</strong>
+    </a>
+  </div>
+  <div class="footer-meta">
+    <span>Manila House · 2026</span>
+    <span>manilahouse.com · @manilahouse</span>
+    <span>Granja Santa Fe · No. 09</span>
+  </div>
+</div>
+</body>
+</html>

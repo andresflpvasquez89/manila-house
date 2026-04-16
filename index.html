@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#1a1a1f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Manila House">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%231a1a1f'/%3E%3Ctext x='90' y='115' font-family='serif' font-size='100' text-anchor='middle' fill='%23a0884d' font-style='italic'%3EM%3C/text%3E%3C/svg%3E">
+<title>Manila House · Curated Stays</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#a0884d;
+  --gold-soft:#c4a668;
+  --gold-deep:#8a7340;
+  --ink:#1a1a1f;
+  --ink-2:#26262c;
+  --ink-3:#32323a;
+  --paper:#f8f5ee;
+  --paper-2:#fdfbf6;
+  --mute:#8a8477;
+  --line:rgba(160,136,77,.18);
+  --line-2:rgba(160,136,77,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--ink);color:var(--paper);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body{padding-bottom:env(safe-area-inset-bottom);padding-top:env(safe-area-inset-top)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.app{max-width:520px;margin:0 auto;min-height:100vh;position:relative}
+
+.hero{
+  position:relative;
+  padding:32px 24px 40px;
+  background:linear-gradient(180deg, #1a1a1f 0%, #26262c 100%);
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:0;left:24px;width:40px;height:1px;background:var(--gold);
+}
+.hero-label{
+  font-size:10px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-top:16px;margin-bottom:18px;font-weight:500;
+}
+.hero-title{
+  font-family:'Fraunces',serif;font-weight:300;font-size:38px;line-height:1;letter-spacing:-.02em;
+}
+.hero-title em{font-style:italic;font-weight:400;color:var(--gold-soft)}
+.hero-sub{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:15px;color:#a8a59a;margin-top:10px;line-height:1.4;
+}
+.hero-stats{
+  display:flex;gap:24px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line);
+}
+.stat-num{font-family:'Fraunces',serif;font-weight:400;font-size:24px;color:var(--gold-soft);line-height:1}
+.stat-lbl{font-size:9px;letter-spacing:.22em;color:var(--mute);text-transform:uppercase;margin-top:4px;font-weight:500}
+
+.section{padding:28px 24px 8px}
+.section-title{
+  display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;
+}
+.section-title h2{
+  font-family:'Fraunces',serif;font-weight:400;font-size:20px;color:var(--paper);
+}
+.section-title h2 em{font-style:italic;color:var(--gold);font-weight:300}
+.section-title span{font-size:10px;letter-spacing:.22em;color:var(--mute);text-transform:uppercase}
+
+/* CTA BIG BANNER Landing */
+.cta-landing{
+  background:linear-gradient(135deg, #32323a 0%, #26262c 100%);
+  border:1px solid var(--line-2);
+  border-radius:16px;
+  padding:22px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin-bottom:8px;
+  transition:all .2s;
+}
+.cta-landing:active{transform:scale(.98)}
+.cta-landing-txt{flex:1;min-width:0}
+.cta-landing-t{font-family:'Fraunces',serif;font-weight:400;font-size:17px;color:var(--paper);line-height:1.2}
+.cta-landing-t em{font-style:italic;color:var(--gold-soft)}
+.cta-landing-s{font-size:11px;color:var(--mute);margin-top:6px;letter-spacing:.1em}
+.cta-landing-arr{color:var(--gold);font-size:22px;font-family:'Fraunces',serif}
+
+/* PROPERTY LIST */
+.prop-list{display:flex;flex-direction:column;gap:10px}
+.prop-card{
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:grid;grid-template-columns:96px 1fr auto;gap:0;
+  align-items:stretch;
+  transition:all .2s ease;
+  cursor:pointer;
+}
+.prop-card:active{transform:scale(.98);border-color:var(--line-2)}
+.prop-img{
+  width:96px;height:96px;object-fit:cover;background:var(--ink-3);
+}
+.prop-info{padding:12px 14px;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.prop-name{
+  font-family:'Fraunces',serif;font-weight:400;font-size:15px;color:var(--paper);line-height:1.15;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.prop-name em{font-style:italic;color:var(--gold-soft);font-weight:400}
+.prop-meta{font-size:11px;color:var(--mute);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.prop-meta span{white-space:nowrap}
+.prop-meta .dot{color:var(--gold);opacity:.5}
+.prop-rating{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-soft);font-weight:500}
+.prop-action{
+  display:flex;align-items:center;justify-content:center;
+  padding:0 14px;color:var(--gold);font-size:20px;
+  border-left:1px solid var(--line);
+}
+.prop-price{
+  font-family:'Fraunces',serif;font-weight:500;font-size:13px;color:var(--gold-soft);
+}
+
+/* FAB WhatsApp */
+.fab-wa{
+  position:fixed;bottom:20px;right:20px;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;color:white;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(37,211,102,.4);
+  z-index:50;transition:all .2s;
+}
+.fab-wa:active{transform:scale(.9)}
+.fab-wa svg{width:28px;height:28px;fill:currentColor}
+@media(max-width:520px){.fab-wa{bottom:calc(20px + env(safe-area-inset-bottom))}}
+
+/* FOOTER */
+.foot{
+  padding:32px 24px 40px;text-align:center;
+  border-top:1px solid var(--line);margin-top:24px;
+}
+.foot-logo{font-family:'Fraunces',serif;font-weight:300;font-size:16px;letter-spacing:.04em}
+.foot-logo em{font-style:italic;color:var(--gold)}
+.foot-meta{font-size:9px;letter-spacing:.3em;color:var(--mute);text-transform:uppercase;margin-top:8px}
+
+.ornament{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:8px 24px;padding:12px 0;
+}
+.ornament::before,.ornament::after{
+  content:'';flex:1;height:1px;background:var(--line);
+}
+.ornament-dot{width:4px;height:4px;border-radius:50%;background:var(--gold)}
+
+.app::after{content:'';display:block;height:80px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="hero">
+    <div class="hero-label">Medellín · Colombia</div>
+    <h1 class="hero-title">Manila <em>House</em></h1>
+    <p class="hero-sub">Curated luxury stays across Colombia</p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">10</div>
+        <div class="stat-lbl">Propiedades</div>
+      </div>
+      <div>
+        <div class="stat-num">4.8<span style="font-size:14px">★</span></div>
+        <div class="stat-lbl">Rating</div>
+      </div>
+      <div>
+        <div class="stat-num">130+</div>
+        <div class="stat-lbl">Huéspedes</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-title">
+      <h2>Vista <em>completa</em></h2>
+      <span>Landing</span>
+    </div>
+    <a href="manila-house-landing.html" class="cta-landing">
+      <div class="cta-landing-txt">
+        <div class="cta-landing-t">Explorar <em>todas las propiedades</em></div>
+        <div class="cta-landing-s">Landing interactiva · Filtros · ES/EN</div>
+      </div>
+      <div class="cta-landing-arr">→</div>
+    </a>
+  </section>
+
+  <div class="ornament"><div class="ornament-dot"></div></div>
+
+  <section class="section" id="catalog">
+    <div class="section-title">
+      <h2>Fichas <em>detalle</em></h2>
+      <span>10 · PDFs</span>
+    </div>
+    <div class="prop-list">
+
+      <a href="pdf-01-pink-house.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1290858101998884441/original/9bb39106-450c-40eb-b299-9d38993d32bd.png?im_w=720" alt="Pink House" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Pink House</div>
+          <div class="prop-meta">
+            <span class="prop-rating">5.0★</span>
+            <span class="dot">·</span>
+            <span>El Poblado · 16 pax</span>
+          </div>
+          <div class="prop-price">$1.200 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-02-villa-envigado.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1101004620982087552/original/26633c87-94b5-4127-b76c-07789dd00726.jpeg?im_w=720" alt="Villa Envigado" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Villa Envigado</div>
+          <div class="prop-meta">
+            <span class="prop-rating">4.86★</span>
+            <span class="dot">·</span>
+            <span>Envigado · 16 pax</span>
+          </div>
+          <div class="prop-price">$500 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-03-manila-duplex.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/miso/Hosting-1110884002900293281/original/ba6534ec-f31a-4490-977c-a93b5f996c3a.jpeg?im_w=720" alt="Manila Dúplex" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Manila <em>Dúplex</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating">4.62★</span>
+            <span class="dot">·</span>
+            <span>El Poblado · 16 pax</span>
+          </div>
+          <div class="prop-price">$350 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-04-manila-5-basketball.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1187389206846542308/original/f37f08c3-9f4e-41f1-8826-f245e76ea034.png?im_w=720" alt="Manila 5 Basketball" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Manila 5 <em>Basketball</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating">4.60★</span>
+            <span class="dot">·</span>
+            <span>El Poblado · 16 pax</span>
+          </div>
+          <div class="prop-price">$350 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-05-manila-1-galeria.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/miso/Hosting-995802205246797979/original/c39d37f7-ab6a-4708-9661-6f4d0330c6d5.jpeg?im_w=720" alt="Manila 1 Galería" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Manila 1 <em>Galería</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating">4.76★</span>
+            <span class="dot">·</span>
+            <span>El Poblado · 11 pax</span>
+          </div>
+          <div class="prop-price">$230 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-06-manila-3-tropical.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/miso/Hosting-921716470981445229/original/8a77104b-c553-4517-8bbe-6e4b49d53467.jpeg?im_w=720" alt="Manila 3 Tropical" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Manila 3 <em>Tropical</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating">4.73★</span>
+            <span class="dot">·</span>
+            <span>El Poblado · 11 pax</span>
+          </div>
+          <div class="prop-price">$230 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-07-manila-2-nomadas.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-803975683932060019/original/0a93bb5d-1cef-4754-a80c-f9ca8bce4db4.jpeg?im_w=720" alt="Manila 2 Nómadas" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Manila 2 <em>Nómadas</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating">4.78★</span>
+            <span class="dot">·</span>
+            <span>El Poblado · 7 pax</span>
+          </div>
+          <div class="prop-price">$160 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-08-casa-campestre-rionegro.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1367832882891245476/original/dd71c5f4-30e9-4502-b803-f8a118c89abd.jpeg?im_w=720" alt="Casa Campestre Rionegro" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Casa Campestre <em>Rionegro</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating">4.84★</span>
+            <span class="dot">·</span>
+            <span>Rionegro · 10 pax</span>
+          </div>
+          <div class="prop-price">$250 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-09-granja-santa-fe.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1361167783206300607/original/08f166b0-ef13-4bc2-8ba0-44d4e461bb1d.jpeg?im_w=720" alt="Granja Santa Fe" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Granja <em>Santa Fe</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating" style="color:#c4a668">NEW</span>
+            <span class="dot">·</span>
+            <span>Sta Fe Ant. · 19 pax</span>
+          </div>
+          <div class="prop-price">$450 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+      <a href="pdf-10-loft-premium-bogota.html" class="prop-card">
+        <img class="prop-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1411339769763131440/original/bd478736-2d45-472b-9283-52beff04e257.jpeg?im_w=720" alt="Loft Premium Bogotá" loading="lazy">
+        <div class="prop-info">
+          <div class="prop-name">Loft Premium <em>Bogotá</em></div>
+          <div class="prop-meta">
+            <span class="prop-rating" style="color:#c4a668">NEW</span>
+            <span class="dot">·</span>
+            <span>Bogotá · 6 pax</span>
+          </div>
+          <div class="prop-price">$200 USD / noche</div>
+        </div>
+        <div class="prop-action">›</div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-logo">Manila <em>House</em></div>
+    <div class="foot-meta">Medellín · Colombia · 2026</div>
+  </footer>
+
+</div>
+
+<a href="https://wa.me/573007139578?text=%C2%A1Hola%21%20Me%20gustar%C3%ADa%20reservar%20una%20propiedad%20Manila%20House" target="_blank" class="fab-wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM20.52 3.449C18.24 1.245 15.24 0 12.05 0 5.495 0 .16 5.334.157 11.892c0 2.096.547 4.142 1.588 5.946L.057 24l6.304-1.654c1.737.948 3.693 1.447 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893 0-3.181-1.256-6.174-3.44-8.45z"/></svg>
+</a>
+
+</body>
+</html>

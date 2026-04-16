@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manila House — Premium Stays in Medellín</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f5;
+  --bg-deep: #f0ece6;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-soft: #6b6460;
+  --text-faint: #a09890;
+  --accent: #a0884d;
+  --accent-dark: #8a7340;
+  --accent-light: #d4c9a8;
+  --accent-glow: #a0884d15;
+  --gold: #a0884d;
+  --border: #e8e2da;
+  --shadow: 0 2px 20px rgba(0,0,0,.06);
+  --shadow-hover: 0 8px 40px rgba(0,0,0,.1);
+  --radius: 16px;
+  --header-h: 72px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* === HEADER === */
+.header {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:var(--header-h);
+  background:rgba(250,248,245,.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 clamp(16px,4vw,48px);
+  transition:box-shadow .3s;
+}
+.header.scrolled { box-shadow:0 2px 20px rgba(0,0,0,.06); }
+
+.logo {
+  display:flex; align-items:center; gap:10px;
+}
+.logo-svg { flex-shrink:0; }
+.logo-text {
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px; font-weight:700; color:#a0884d;
+  letter-spacing:3px; text-transform:uppercase;
+  line-height:1.1;
+}
+.logo-text span { font-weight:700; }
+
+.header-actions { display:flex; align-items:center; gap:12px; }
+.lang-toggle {
+  background:none; border:1px solid var(--border);
+  border-radius:8px; padding:6px 12px;
+  font-size:12px; font-weight:600; color:var(--text-soft);
+  cursor:pointer; font-family:inherit; transition:all .2s;
+  letter-spacing:.5px;
+}
+.lang-toggle:hover { border-color:var(--accent); color:var(--accent); }
+
+.wa-header-btn {
+  background:#a0884d; color:#fff; border:none;
+  border-radius:10px; padding:8px 18px;
+  font-size:13px; font-weight:600; cursor:pointer;
+  font-family:inherit; transition:all .2s;
+  display:flex; align-items:center; gap:6px;
+}
+.wa-header-btn:hover { background:#8a7340; transform:translateY(-1px); }
+
+/* === HERO === */
+.hero {
+  margin-top:var(--header-h);
+  padding:clamp(60px,10vw,120px) clamp(20px,5vw,60px) clamp(40px,6vw,80px);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg-deep) 100%);
+}
+.hero::before {
+  content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;
+  background:radial-gradient(circle,var(--accent-glow) 0%,transparent 60%);
+  pointer-events:none;
+}
+
+.hero-eyebrow {
+  font-size:12px; font-weight:600; letter-spacing:3px;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:16px;
+}
+.hero h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,7vw,72px);
+  font-weight:300; line-height:1.1;
+  letter-spacing:-1px; color:var(--text);
+  max-width:700px; margin:0 auto;
+}
+.hero h1 em {
+  font-style:italic; font-weight:500;
+  color:var(--accent-dark);
+}
+.hero-sub {
+  font-size:clamp(15px,2vw,18px);
+  color:var(--text-soft); margin-top:20px;
+  max-width:520px; margin-left:auto; margin-right:auto;
+  font-weight:300; line-height:1.7;
+}
+
+.hero-stats {
+  display:flex; justify-content:center; gap:clamp(24px,4vw,48px);
+  margin-top:40px; flex-wrap:wrap;
+}
+.stat { text-align:center; }
+.stat-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4vw,42px); font-weight:600;
+  color:var(--accent-dark); line-height:1;
+}
+.stat-label {
+  font-size:11px; color:var(--text-faint);
+  text-transform:uppercase; letter-spacing:1.5px;
+  margin-top:4px; font-weight:500;
+}
+
+/* === FILTERS === */
+.filters-section {
+  padding:0 clamp(16px,4vw,48px);
+  position:relative; z-index:10;
+}
+.filters-bar {
+  max-width:900px; margin:-28px auto 0;
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:16px 20px;
+  display:flex; gap:12px; align-items:center;
+  flex-wrap:wrap;
+  border:1px solid var(--border);
+}
+.filter-group { display:flex; flex-direction:column; gap:4px; flex:1; min-width:140px; }
+.filter-label {
+  font-size:10px; font-weight:600; text-transform:uppercase;
+  letter-spacing:1px; color:var(--text-faint);
+}
+.filter-select, .filter-input {
+  border:1px solid var(--border); border-radius:8px;
+  padding:8px 12px; font-size:13px; font-family:inherit;
+  color:var(--text); background:var(--bg);
+  cursor:pointer; transition:border-color .2s;
+  -webkit-appearance:none; appearance:none;
+}
+.filter-select:focus, .filter-input:focus { outline:none; border-color:var(--accent); }
+.filter-select {
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a09890' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 10px center;
+  padding-right:32px;
+}
+
+/* === PROPERTIES GRID === */
+.properties-section {
+  padding:40px clamp(16px,4vw,48px) 60px;
+  max-width:1200px; margin:0 auto;
+}
+.properties-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:24px; flex-wrap:wrap; gap:12px;
+}
+.properties-count { font-size:14px; color:var(--text-soft); }
+.properties-count strong { color:var(--text); font-weight:600; }
+
+.properties-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:24px;
+}
+
+/* === PROPERTY CARD === */
+.prop-card {
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:all .35s cubic-bezier(.22,1,.36,1);
+  cursor:pointer;
+  border:1px solid transparent;
+}
+.prop-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+  border-color:var(--accent-light);
+}
+
+.prop-img {
+  position:relative; height:220px; overflow:hidden;
+  background:var(--bg-deep);
+}
+.prop-img-placeholder {
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:48px;
+  background:linear-gradient(135deg,var(--accent-light) 0%,var(--bg-deep) 100%);
+}
+.prop-badges {
+  position:absolute; top:12px; left:12px;
+  display:flex; gap:6px; flex-wrap:wrap;
+}
+.prop-badge {
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);
+  padding:4px 10px; border-radius:20px;
+  font-size:11px; font-weight:600; color:var(--text);
+}
+.prop-badge.featured { background:var(--accent); color:#fff; }
+.prop-badge.rating { background:rgba(255,255,255,.95); color:var(--gold); }
+
+.prop-fav {
+  position:absolute; top:12px; right:12px;
+  width:34px; height:34px; border-radius:50%;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; cursor:pointer;
+  transition:all .2s; border:none;
+}
+.prop-fav:hover { background:#fff; transform:scale(1.1); }
+.prop-fav.liked { background:var(--accent); color:#fff; }
+
+.prop-info { padding:18px 20px 20px; }
+.prop-zone {
+  font-size:11px; font-weight:600; letter-spacing:1px;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:4px;
+}
+.prop-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px; font-weight:600; line-height:1.2;
+  color:var(--text); margin-bottom:8px;
+}
+.prop-features {
+  display:flex; gap:16px; flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.prop-feat {
+  display:flex; align-items:center; gap:5px;
+  font-size:12px; color:var(--text-soft);
+}
+.prop-feat svg { width:14px; height:14px; stroke:var(--text-faint); fill:none; stroke-width:1.8; }
+
+.prop-bottom {
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top:14px; border-top:1px solid var(--border);
+}
+.prop-price {
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px; font-weight:600; color:var(--text);
+}
+.prop-price span {
+  font-family:'Outfit',sans-serif;
+  font-size:12px; font-weight:400; color:var(--text-faint);
+}
+
+.prop-cta {
+  background:var(--accent); color:#fff; border:none;
+  border-radius:10px; padding:8px 18px;
+  font-size:12px; font-weight:600; cursor:pointer;
+  font-family:inherit; transition:all .2s;
+  display:flex; align-items:center; gap:5px;
+}
+.prop-cta:hover { background:var(--accent-dark); transform:translateY(-1px); }
+
+.prop-pdf-btn {
+  background:none; color:var(--accent); border:1px solid var(--accent);
+  border-radius:10px; padding:8px 14px;
+  font-size:12px; font-weight:600; cursor:pointer;
+  font-family:inherit; transition:all .2s;
+  display:flex; align-items:center; gap:5px;
+}
+.prop-pdf-btn:hover { background:var(--accent); color:#fff; transform:translateY(-1px); }
+
+.modal-pdf-btn {
+  width:100%; background:none; color:var(--accent); border:1.5px solid var(--accent);
+  border-radius:12px; padding:12px;
+  font-size:14px; font-weight:600; cursor:pointer;
+  font-family:inherit; transition:all .2s;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  margin-top:10px;
+}
+.modal-pdf-btn:hover { background:var(--accent); color:#fff; }
+
+/* === PDF VIEWER MODAL === */
+.pdf-viewer-overlay {
+  display:none; position:fixed; inset:0; z-index:250;
+  background:rgba(10,10,15,.85);
+  backdrop-filter:blur(8px);
+  align-items:center; justify-content:center;
+  padding:20px;
+}
+.pdf-viewer-overlay.open { display:flex; }
+.pdf-viewer {
+  background:#f0ece6;
+  border-radius:16px;
+  width:100%; max-width:1100px; height:94vh;
+  display:flex; flex-direction:column;
+  box-shadow:0 30px 100px rgba(0,0,0,.5);
+  overflow:hidden;
+  border:1px solid rgba(160,136,77,.3);
+}
+.pdf-viewer-header {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 20px;
+  background:#1a1a1f;
+  color:#f4f1ea;
+  border-bottom:1px solid rgba(160,136,77,.25);
+  flex-shrink:0;
+}
+.pdf-viewer-brand {
+  display:flex; align-items:center; gap:12px;
+}
+.pdf-viewer-titles { display:flex; flex-direction:column; gap:2px; }
+.pdf-viewer-eyebrow {
+  font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  color:#c4a668; font-weight:600;
+}
+.pdf-viewer-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px; font-weight:600;
+  color:#fdfbf6;
+}
+.pdf-viewer-actions { display:flex; align-items:center; gap:8px; }
+.pdf-action-btn {
+  background:rgba(160,136,77,.15);
+  color:#c4a668;
+  border:1px solid rgba(160,136,77,.35);
+  border-radius:8px;
+  padding:7px 14px;
+  font-size:12px; font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+  display:flex; align-items:center; gap:6px;
+  transition:all .2s;
+}
+.pdf-action-btn:hover {
+  background:#a0884d; color:#fdfbf6;
+  border-color:#a0884d;
+}
+.pdf-viewer-close {
+  background:rgba(255,255,255,.08);
+  color:#fdfbf6;
+  border:none;
+  width:34px; height:34px; border-radius:50%;
+  font-size:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+.pdf-viewer-close:hover { background:rgba(255,255,255,.18); transform:scale(1.05); }
+.pdf-viewer-body {
+  flex:1;
+  background:#2a2a30;
+  overflow:hidden;
+  position:relative;
+}
+.pdf-viewer-body iframe {
+  width:100%; height:100%; border:none;
+  background:#f0ece6;
+}
+@media(max-width:768px) {
+  .pdf-viewer-overlay { padding:0; }
+  .pdf-viewer { height:100vh; max-width:100%; border-radius:0; }
+  .pdf-action-btn span { display:none; }
+  .pdf-action-btn { padding:7px 10px; }
+  .pdf-viewer-header { padding:12px 14px; }
+}
+
+/* === MODAL === */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px);
+  align-items:center; justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--card-bg); border-radius:20px;
+  max-width:680px; width:100%; max-height:90vh;
+  overflow-y:auto; position:relative;
+  box-shadow:0 20px 80px rgba(0,0,0,.2);
+}
+.modal-close {
+  position:absolute; top:16px; right:16px; z-index:10;
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(255,255,255,.9); border:none;
+  font-size:18px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+.modal-close:hover { background:#fff; transform:scale(1.1); }
+.modal-img {
+  width:100%; height:280px;
+  background:linear-gradient(135deg,var(--accent-light),var(--bg-deep));
+  display:flex; align-items:center; justify-content:center;
+  font-size:64px; border-radius:20px 20px 0 0;
+}
+.modal-body { padding:28px; }
+.modal-zone {
+  font-size:11px; font-weight:600; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--accent); margin-bottom:4px;
+}
+.modal-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px; font-weight:600; margin-bottom:12px;
+  line-height:1.15;
+}
+.modal-desc { font-size:14px; color:var(--text-soft); line-height:1.7; margin-bottom:20px; }
+.modal-amenities {
+  display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;
+}
+.amenity-tag {
+  background:var(--bg); border:1px solid var(--border);
+  padding:6px 14px; border-radius:20px;
+  font-size:12px; color:var(--text-soft); font-weight:500;
+}
+.modal-details {
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  margin-bottom:24px;
+}
+.detail-label { font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--text-faint); }
+.detail-value { font-size:15px; font-weight:600; color:var(--text); margin-top:2px; }
+.modal-cta {
+  width:100%; background:var(--accent); color:#fff;
+  border:none; border-radius:12px; padding:14px;
+  font-size:15px; font-weight:600; cursor:pointer;
+  font-family:inherit; transition:all .2s;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.modal-cta:hover { background:var(--accent-dark); }
+
+/* === ABOUT === */
+.about-section {
+  padding:60px clamp(16px,4vw,48px);
+  background:var(--bg-deep);
+}
+.about-inner { max-width:800px; margin:0 auto; text-align:center; }
+.about-inner h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,5vw,40px); font-weight:400;
+  margin-bottom:16px; line-height:1.2;
+}
+.about-inner h2 em { font-weight:600; color:var(--accent-dark); }
+.about-inner p { font-size:15px; color:var(--text-soft); line-height:1.8; max-width:600px; margin:0 auto; }
+.about-features {
+  display:flex; gap:24px; justify-content:center;
+  margin-top:32px; flex-wrap:wrap;
+}
+.about-feat { text-align:center; max-width:180px; }
+.about-feat-icon { font-size:28px; margin-bottom:8px; }
+.about-feat-title { font-size:14px; font-weight:600; margin-bottom:4px; }
+.about-feat-desc { font-size:12px; color:var(--text-faint); }
+
+/* === FOOTER === */
+.footer {
+  padding:40px clamp(16px,4vw,48px);
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+.footer-brand {
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px; font-weight:600; margin-bottom:8px;
+}
+.footer-links { display:flex; gap:20px; justify-content:center; margin-bottom:12px; }
+.footer-links a {
+  font-size:12px; color:var(--text-faint); text-decoration:none;
+  transition:color .2s;
+}
+.footer-links a:hover { color:var(--accent); }
+.footer-copy { font-size:11px; color:var(--text-faint); }
+
+/* === FLOATING WA === */
+.wa-float {
+  position:fixed; bottom:24px; right:24px; z-index:90;
+  width:56px; height:56px; border-radius:50%;
+  background:#25D366; color:#fff; border:none;
+  box-shadow:0 4px 20px rgba(37,211,102,.35);
+  display:flex; align-items:center; justify-content:center;
+  font-size:28px; cursor:pointer;
+  transition:all .3s; animation:pulse-wa 2s infinite;
+}
+.wa-float:hover { transform:scale(1.1); box-shadow:0 6px 30px rgba(37,211,102,.45); }
+@keyframes pulse-wa {
+  0%,100% { box-shadow:0 4px 20px rgba(37,211,102,.35); }
+  50% { box-shadow:0 4px 30px rgba(37,211,102,.55); }
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.prop-card { animation:fadeUp .5s ease both; }
+.prop-card:nth-child(2) { animation-delay:.08s; }
+.prop-card:nth-child(3) { animation-delay:.16s; }
+.prop-card:nth-child(4) { animation-delay:.24s; }
+.prop-card:nth-child(5) { animation-delay:.32s; }
+.prop-card:nth-child(6) { animation-delay:.40s; }
+
+@media(max-width:640px) {
+  .filters-bar { flex-direction:column; }
+  .filter-group { min-width:100%; }
+  .properties-grid { grid-template-columns:1fr; }
+  .modal-details { grid-template-columns:1fr; }
+  .hero-stats { gap:20px; }
+  .wa-header-btn span { display:none; }
+  .header-actions { gap:8px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="logo">
+    <svg class="logo-svg" width="40" height="36" viewBox="0 0 60 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="2" width="44" height="10" rx="1" stroke="#a0884d" stroke-width="3" fill="none"/>
+      <line x1="14" y1="12" x2="14" y2="44" stroke="#a0884d" stroke-width="3"/>
+      <line x1="46" y1="12" x2="46" y2="44" stroke="#a0884d" stroke-width="3"/>
+      <line x1="14" y1="44" x2="46" y2="44" stroke="#a0884d" stroke-width="3"/>
+      <rect x="24" y="22" width="12" height="22" stroke="#a0884d" stroke-width="3" fill="none"/>
+      <line x1="24" y1="32" x2="36" y2="32" stroke="#a0884d" stroke-width="2"/>
+    </svg>
+    <div class="logo-text">MANILA <span>HOUSE</span></div>
+  </div>
+  <div class="header-actions">
+    <button class="lang-toggle" onclick="toggleLang()" id="langBtn">ES / EN</button>
+    <button class="wa-header-btn" onclick="openWhatsApp()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.682-1.423A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.591-.838-6.313-2.236l-.44-.362-3.091.94.87-3.178-.378-.456A9.946 9.946 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+      <span data-i18n="header_wa">Book Now</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow" data-i18n="hero_eyebrow">PREMIUM STAYS IN MEDELLÍN & ANTIOQUIA</div>
+  <h1 data-i18n="hero_title">Your <em>perfect stay</em> in Colombia starts here</h1>
+  <p class="hero-sub" data-i18n="hero_sub">Handpicked luxury homes for families, groups, and travelers looking for an unforgettable experience in Medellín and beyond.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label" data-i18n="stat_props">Properties</div></div>
+    <div class="stat"><div class="stat-num">5.0 ★</div><div class="stat-label" data-i18n="stat_rating">Top Rated</div></div>
+    <div class="stat"><div class="stat-num">2-19</div><div class="stat-label" data-i18n="stat_guests">Guests</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label" data-i18n="stat_zones">Zones</div></div>
+  </div>
+</section>
+
+<div class="filters-section">
+  <div class="filters-bar">
+    <div class="filter-group">
+      <label class="filter-label" data-i18n="filter_zone">Zone</label>
+      <select class="filter-select" id="filterZone" onchange="filterProperties()">
+        <option value="all" data-i18n="filter_all">All Zones</option>
+        <option value="El Poblado">El Poblado</option>
+        <option value="Envigado">Envigado</option>
+        <option value="Rionegro">Rionegro</option>
+        <option value="Santa Fe Ant.">Santa Fe</option>
+        <option value="Bogotá">Bogotá</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label" data-i18n="filter_guests">Guests</label>
+      <select class="filter-select" id="filterGuests" onchange="filterProperties()">
+        <option value="0" data-i18n="filter_any">Any</option>
+        <option value="2">2+</option>
+        <option value="6">6+</option>
+        <option value="10">10+</option>
+        <option value="16">16+</option>
+        <option value="20">20+</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label" data-i18n="filter_type">Type</label>
+      <select class="filter-select" id="filterType" onchange="filterProperties()">
+        <option value="all" data-i18n="filter_all_types">All Types</option>
+        <option value="house" data-i18n="filter_house">House / Villa</option>
+        <option value="apartment" data-i18n="filter_apt">Apartment</option>
+        <option value="farm" data-i18n="filter_farm">Farm / Country</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label" data-i18n="filter_sort">Sort</label>
+      <select class="filter-select" id="filterSort" onchange="filterProperties()">
+        <option value="featured" data-i18n="sort_featured">Featured</option>
+        <option value="price-low" data-i18n="sort_price_low">Price: Low to High</option>
+        <option value="price-high" data-i18n="sort_price_high">Price: High to Low</option>
+        <option value="capacity" data-i18n="sort_capacity">Most Guests</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<section class="properties-section">
+  <div class="properties-header">
+    <div class="properties-count"><strong id="propCount">10</strong> <span data-i18n="properties_available">properties available</span></div>
+  </div>
+  <div class="properties-grid" id="propertiesGrid"></div>
+</section>
+
+<section class="about-section">
+  <div class="about-inner">
+    <h2 data-i18n="about_title">Why <em>Manila House</em>?</h2>
+    <p data-i18n="about_desc">We personally curate every property in our collection. From luxury villas in El Poblado to countryside farms, every stay comes with our personal attention and local expertise.</p>
+    <div class="about-features">
+      <div class="about-feat"><div class="about-feat-icon">🔑</div><div class="about-feat-title" data-i18n="feat1_title">Verified Homes</div><div class="about-feat-desc" data-i18n="feat1_desc">Every property is personally inspected and maintained by our team</div></div>
+      <div class="about-feat"><div class="about-feat-icon">💬</div><div class="about-feat-title" data-i18n="feat2_title">Direct Support</div><div class="about-feat-desc" data-i18n="feat2_desc">WhatsApp support before, during, and after your stay</div></div>
+      <div class="about-feat"><div class="about-feat-icon">🎬</div><div class="about-feat-title" data-i18n="feat3_title">Home Cinema</div><div class="about-feat-desc" data-i18n="feat3_desc">Select properties feature 100" projector cinema setups</div></div>
+      <div class="about-feat"><div class="about-feat-icon">🧀</div><div class="about-feat-title" data-i18n="feat4_title">Local Food</div><div class="about-feat-desc" data-i18n="feat4_desc">Exclusive catering from our partner restaurant Los Puesudos</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand" style="color:#a0884d;letter-spacing:3px;text-transform:uppercase;">Manila House</div>
+  <div style="font-size:11px;color:var(--text-faint);letter-spacing:2px;margin-bottom:12px;text-transform:uppercase;">Propiedades</div>
+  <div class="footer-links">
+    <a href="#" onclick="openWhatsApp()">WhatsApp</a>
+    <a href="#">Airbnb</a>
+    <a href="#">Instagram</a>
+  </div>
+  <div class="footer-copy">© 2026 Manila House — Medellín, Colombia</div>
+</footer>
+
+<button class="wa-float" onclick="openWhatsApp()" title="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.682-1.423A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.591-.838-6.313-2.236l-.44-.362-3.091.94.87-3.178-.378-.456A9.946 9.946 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+</button>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-body">
+      <div class="modal-zone" id="modalZone"></div>
+      <h2 class="modal-name" id="modalName"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-amenities" id="modalAmenities"></div>
+      <div class="modal-details" id="modalDetails"></div>
+      <button class="modal-cta" onclick="openWhatsApp()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.682-1.423A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.591-.838-6.313-2.236l-.44-.362-3.091.94.87-3.178-.378-.456A9.946 9.946 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        <span data-i18n="modal_cta">Book via WhatsApp — Best Price Guaranteed</span>
+      </button>
+      <button class="modal-pdf-btn" id="modalPdfBtn" onclick="">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span id="modalPdfText">View Full PDF</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- PDF VIEWER MODAL -->
+<div class="pdf-viewer-overlay" id="pdfViewerOverlay" onclick="closePDFViewer(event)">
+  <div class="pdf-viewer" onclick="event.stopPropagation()">
+    <div class="pdf-viewer-header">
+      <div class="pdf-viewer-brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a0884d" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <div class="pdf-viewer-titles">
+          <div class="pdf-viewer-eyebrow">Manila House · Property PDF</div>
+          <div class="pdf-viewer-title" id="pdfViewerTitle">Property Name</div>
+        </div>
+      </div>
+      <div class="pdf-viewer-actions">
+        <button class="pdf-action-btn" id="pdfViewerWA" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+          <span>WhatsApp</span>
+        </button>
+        <button class="pdf-action-btn" id="pdfViewerDownload" title="Download / Print">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="pdfDownloadText">Download</span>
+        </button>
+        <button class="pdf-action-btn" id="pdfViewerNewTab" title="Open in new tab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </button>
+        <button class="pdf-viewer-close" onclick="closePDFViewer()" title="Close">✕</button>
+      </div>
+    </div>
+    <div class="pdf-viewer-body">
+      <iframe id="pdfViewerFrame" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+// === PDF MAPPING ===
+const pdfFiles = {
+  1:"pdf-01-pink-house.html",2:"pdf-02-villa-envigado.html",3:"pdf-03-manila-duplex.html",
+  4:"pdf-04-manila-5-basketball.html",5:"pdf-05-manila-1-galeria.html",6:"pdf-06-manila-3-tropical.html",
+  7:"pdf-07-manila-2-nomadas.html",8:"pdf-08-casa-campestre-rionegro.html",9:"pdf-09-granja-santa-fe.html",
+  10:"pdf-10-loft-premium-bogota.html"
+};
+
+// === DATA — Precios actualizados a USD ===
+const properties = [
+  { id:1, name:"Pink House", zone:"El Poblado", type:"house", guests:16, rooms:6, bathrooms:7, rating:"5.0", reviews:26, price:1200, featured:true, cinema:false, pool:true, jacuzzi:true,
+    img:"https://a0.muscache.com/im/pictures/hosting/Hosting-1290858101998884441/original/9bb39106-450c-40eb-b299-9d38993d32bd.png?im_w=720",
+    airbnb:"https://es-l.airbnb.com/rooms/1290858101998884441",
+    desc_en:"Exclusive celebrity mansion in El Poblado. 6 bedrooms, 7.5 baths, pool, jacuzzi, ping pong, basketball. The ultimate luxury experience for groups.",
+    desc_es:"Exclusiva mansión de famosos en El Poblado. 6 habitaciones, 7.5 baños, piscina, jacuzzi, ping pong, baloncesto. La experiencia de lujo definitiva para grupos.",
+    amenities:["Pool","Jacuzzi","WiFi","Basketball","Ping Pong","BBQ","Parking","A/C","Kitchen"] },
+  { id:2, name:"Villa Envigado", zone:"Envigado", type:"house", guests:16, rooms:6, bathrooms:6, rating:"4.86", reviews:50, price:500, featured:true, cinema:false, pool:true, jacuzzi:true,
+    img:"https://a0.muscache.com/im/pictures/hosting/Hosting-1101004620982087552/original/26633c87-94b5-4127-b76c-07789dd00726.jpeg?im_w=1200",
+    airbnb:"https://es-l.airbnb.com/rooms/1101004620982087552",
+    desc_en:"Luxury villa with pool, jacuzzi, ping pong, and basketball court. A serene escape in Envigado, minutes from El Poblado.",
+    desc_es:"Villa de lujo con piscina, jacuzzi, ping pong y cancha de baloncesto. Un escape sereno en Envigado, a minutos de El Poblado.",
+    amenities:["Pool","Jacuzzi","WiFi","Basketball","Ping Pong","BBQ","Parking","A/C","Kitchen"] },
+  { id:3, name:"Manila Dúplex", zone:"El Poblado", type:"apartment", guests:16, rooms:7, bathrooms:5, rating:"4.62", reviews:26, price:350, featured:true, cinema:false, pool:false, jacuzzi:false,
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-1110884002900293281/original/ba6534ec-f31a-4490-977c-a93b5f996c3a.jpeg?im_w=720",
+    airbnb:"https://es-l.airbnb.com/rooms/1110884002900293281",
+    desc_en:"Two connected duplex apartments in the heart of Manila, El Poblado. 7 bedrooms, 10 beds, 5 baths, 3 living areas, balcony with views.",
+    desc_es:"Dos apartamentos dúplex conectados en el corazón de Manila, El Poblado. 7 habitaciones, 10 camas, 5 baños, 3 salas, balcón con vista.",
+    amenities:["WiFi","A/C","Balcony","City View","Kitchen","Parking","Pet Friendly","Smart Lock","3 Living Rooms"] },
+  { id:4, name:"Manila 5 — Basketball", zone:"El Poblado", type:"house", guests:16, rooms:7, bathrooms:4, rating:"4.60", reviews:30, price:350, featured:true, cinema:false, pool:false, jacuzzi:true,
+    img:"https://a0.muscache.com/im/pictures/hosting/Hosting-1187389206846542308/original/f37f08c3-9f4e-41f1-8826-f245e76ea034.png?im_w=720",
+    airbnb:"https://es-l.airbnb.com/rooms/1187389206846542308",
+    desc_en:"Our largest property in Manila — 7 bedrooms, 14 beds, jacuzzi and private basketball court. The ultimate group house in El Poblado.",
+    desc_es:"Nuestra propiedad más grande en Manila — 7 habitaciones, 14 camas, jacuzzi y cancha de basketball privada. La casa definitiva para grupos en El Poblado.",
+    amenities:["Jacuzzi","Basketball Court","WiFi","A/C","BBQ","Kitchen","14 Beds","Parking"] },
+  { id:5, name:"Manila 1 — Galería", zone:"El Poblado", type:"apartment", guests:11, rooms:4, bathrooms:3, rating:"4.76", reviews:72, price:230, featured:false, cinema:false, pool:false, jacuzzi:false,
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-995802205246797979/original/c39d37f7-ab6a-4708-9661-6f4d0330c6d5.jpeg?im_w=720",
+    airbnb:"https://es-l.airbnb.com/rooms/995802205246797979",
+    desc_en:"Art gallery-inspired apartment in Manila, El Poblado. 4 bedrooms, balcony, and a curated aesthetic in the most vibrant neighborhood.",
+    desc_es:"Apartamento inspirado en galería de arte en Manila, El Poblado. 4 habitaciones, balcón y estética curada en el barrio más vibrante.",
+    amenities:["WiFi","A/C","Balcony","Art Decor","Kitchen","City View"] },
+  { id:6, name:"Manila 3 — Tropical", zone:"El Poblado", type:"apartment", guests:11, rooms:3, bathrooms:2, rating:"4.73", reviews:40, price:230, featured:false, cinema:false, pool:false, jacuzzi:true,
+    img:"https://a0.muscache.com/im/pictures/miso/Hosting-921716470981445229/original/8a77104b-c553-4517-8bbe-6e4b49d53467.jpeg?im_w=720",
+    airbnb:"https://es-l.airbnb.com/rooms/921716470981445229",
+    desc_en:"Tropical fresh retreat with jacuzzi and BBQ in Manila, El Poblado. 3 bedrooms, 8 beds, perfect for groups wanting a relaxed vibe.",
+    desc_es:"Retiro tropical fresco con jacuzzi y BBQ en Manila, El Poblado. 3 habitaciones, 8 camas, perfecto para grupos que buscan un ambiente relajado.",
+    amenities:["Jacuzzi","BBQ","WiFi","A/C","Kitchen","Tropical Decor"] },
+  { id:7, name:"Manila 2 — Nómadas", zone:"El Poblado", type:"apartment", guests:7, rooms:3, bathrooms:2, rating:"4.78", reviews:55, price:160, featured:false, cinema:false, pool:false, jacuzzi:false,
+    img:"https://a0.muscache.com/im/pictures/hosting/Hosting-803975683932060019/original/0a93bb5d-1cef-4754-a80c-f9ca8bce4db4.jpeg?im_w=720",
+    airbnb:"https://es-l.airbnb.com/rooms/803975683932060019",
+    desc_en:"Comfort, A/C and 577 Mbps WiFi in Manila, El Poblado. 3 bedrooms, perfect for digital nomads and small groups.",
+    desc_es:"Confort, A/C y WiFi de 577 Mbps en Manila, El Poblado. 3 habitaciones, perfecto para nómadas digitales y grupos pequeños.",
+    amenities:["577 Mbps WiFi","A/C","Workspace","Kitchen","Smart Lock"] },
+  { id:8, name:"Casa Campestre Rionegro", zone:"Rionegro", type:"farm", guests:10, rooms:3, bathrooms:2, rating:"4.84", reviews:20, price:250, featured:false, cinema:true, pool:false, jacuzzi:true,
+    img:"https://a0.muscache.com/im/pictures/hosting/Hosting-1367832882891245476/original/dd71c5f4-30e9-4502-b803-f8a118c89abd.jpeg?im_w=1200",
+    airbnb:"https://es-l.airbnb.com/rooms/1367832882891245476",
+    desc_en:"Countryside house with jacuzzi, home cinema, and just 10 min from the airport. 3 bedrooms, 8 beds. Perfect for families and nature lovers.",
+    desc_es:"Casa campestre con jacuzzi, cine en casa, a 10 min del aeropuerto. 3 habitaciones, 8 camas. Perfecta para familias y amantes de la naturaleza.",
+    amenities:["Jacuzzi","Home Cinema","WiFi","BBQ","Garden","Mountain View","Parking","Kitchen"] },
+  { id:9, name:"Granja Santa Fe", zone:"Santa Fe Ant.", type:"farm", guests:19, rooms:6, bathrooms:8, rating:null, reviews:0, price:450, featured:false, cinema:false, pool:true, jacuzzi:true,
+    img:"https://a0.muscache.com/im/pictures/hosting/Hosting-1361167783206300607/original/08f166b0-ef13-4bc2-8ba0-44d4e461bb1d.jpeg?im_w=1200",
+    airbnb:"https://es-l.airbnb.com/rooms/1361167783206300607",
+    desc_en:"Desert farm in Santa Fe de Antioquia with pool and jacuzzi. 6 bedrooms, 19 beds, 8 baths. A unique Colombian countryside experience.",
+    desc_es:"Granja en el desierto de Santa Fe de Antioquia con piscina y jacuzzi. 6 habitaciones, 19 camas, 8 baños. Una experiencia campestre colombiana única.",
+    amenities:["Pool","Jacuzzi","WiFi","BBQ","Farm","Nature","Kitchen","Hammocks","Parking"] },
+  { id:10, name:"Loft Premium Bogotá", zone:"Bogotá", type:"apartment", guests:6, rooms:2, bathrooms:2, rating:null, reviews:0, price:200, featured:true, cinema:false, pool:false, jacuzzi:false,
+    img:"https://a0.muscache.com/im/pictures/hosting/Hosting-1411339769763131440/original/bd478736-2d45-472b-9283-52beff04e257.jpeg?im_w=720",
+    airbnb:"https://es-l.airbnb.com/rooms/1411339769763131440",
+    desc_en:"Exclusive premium loft in Bogotá — modern, spacious, 2 bedrooms, 2.5 baths. Perfect for couples or small groups visiting the capital.",
+    desc_es:"Loft exclusivo premium en Bogotá — moderno, espacioso, 2 habitaciones, 2.5 baños. Perfecto para parejas o grupos pequeños que visitan la capital.",
+    amenities:["WiFi","A/C","Modern Design","Kitchen","City View","Workspace"] }
+];
+
+let lang = 'en';
+const i18n = {
+  en: {
+    hero_eyebrow:"PREMIUM STAYS IN MEDELLÍN & ANTIOQUIA",
+    hero_title:'Your <em>perfect stay</em> in Colombia starts here',
+    hero_sub:"Handpicked luxury homes for families, groups, and travelers looking for an unforgettable experience in Medellín and beyond.",
+    stat_props:"Properties", stat_rating:"Top Rated", stat_guests:"Guests", stat_zones:"Zones",
+    filter_zone:"Zone", filter_guests:"Guests", filter_type:"Type", filter_sort:"Sort",
+    filter_all:"All Zones", filter_any:"Any", filter_all_types:"All Types",
+    filter_house:"House / Villa", filter_apt:"Apartment", filter_farm:"Farm / Country",
+    sort_featured:"Featured", sort_price_low:"Price: Low → High", sort_price_high:"Price: High → Low", sort_capacity:"Most Guests",
+    properties_available:"properties available",
+    header_wa:"Book Now",
+    per_night:"/night USD",
+    btn_inquire:"Inquire",
+    about_title:'Why <em>Manila House</em>?',
+    about_desc:"We personally curate every property in our collection. From luxury villas in El Poblado to countryside farms, every stay comes with our personal attention and local expertise.",
+    feat1_title:"Verified Homes", feat1_desc:"Every property is personally inspected and maintained by our team",
+    feat2_title:"Direct Support", feat2_desc:"WhatsApp support before, during, and after your stay",
+    feat3_title:"Home Cinema", feat3_desc:"Select properties feature 100\" projector cinema setups",
+    feat4_title:"Local Food", feat4_desc:"Exclusive catering from our partner restaurant Los Puesudos",
+    modal_cta:"Book via WhatsApp — Best Price Guaranteed",
+    wa_msg:"Hi! I'm interested in booking a property at Manila House. Can you help me?"
+  },
+  es: {
+    hero_eyebrow:"ESTADÍAS PREMIUM EN MEDELLÍN Y ANTIOQUIA",
+    hero_title:'Tu <em>estadía perfecta</em> en Colombia empieza aquí',
+    hero_sub:"Casas de lujo seleccionadas a mano para familias, grupos y viajeros que buscan una experiencia inolvidable en Medellín y más allá.",
+    stat_props:"Propiedades", stat_rating:"Top Rating", stat_guests:"Huéspedes", stat_zones:"Zonas",
+    filter_zone:"Zona", filter_guests:"Huéspedes", filter_type:"Tipo", filter_sort:"Ordenar",
+    filter_all:"Todas las Zonas", filter_any:"Cualquiera", filter_all_types:"Todos los Tipos",
+    filter_house:"Casa / Villa", filter_apt:"Apartamento", filter_farm:"Finca / Campo",
+    sort_featured:"Destacados", sort_price_low:"Precio: Menor → Mayor", sort_price_high:"Precio: Mayor → Menor", sort_capacity:"Más Capacidad",
+    properties_available:"propiedades disponibles",
+    header_wa:"Reservar",
+    per_night:"/noche USD",
+    btn_inquire:"Consultar",
+    about_title:'¿Por qué <em>Manila House</em>?',
+    about_desc:"Curamos personalmente cada propiedad de nuestra colección. Desde villas de lujo en El Poblado hasta fincas campestres, cada estadía viene con nuestra atención personal y expertise local.",
+    feat1_title:"Verificadas", feat1_desc:"Cada propiedad es inspeccionada y mantenida personalmente por nuestro equipo",
+    feat2_title:"Soporte Directo", feat2_desc:"Soporte por WhatsApp antes, durante y después de tu estadía",
+    feat3_title:"Cine en Casa", feat3_desc:"Propiedades selectas con proyector de cine de 100 pulgadas",
+    feat4_title:"Comida Local", feat4_desc:"Catering exclusivo de nuestro restaurante aliado Los Puesudos",
+    modal_cta:"Reservar por WhatsApp — Mejor Precio Garantizado",
+    wa_msg:"¡Hola! Estoy interesado en reservar una propiedad en Manila House. ¿Me pueden ayudar?"
+  }
+};
+
+function toggleLang() {
+  lang = lang === 'en' ? 'es' : 'en';
+  document.getElementById('langBtn').textContent = lang === 'en' ? 'ES / EN' : 'EN / ES';
+  applyLang();
+  renderProperties();
+}
+function applyLang() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key]) {
+      if (el.tagName === 'OPTION') el.textContent = i18n[lang][key];
+      else el.innerHTML = i18n[lang][key];
+    }
+  });
+}
+
+function renderProperties() {
+  const grid = document.getElementById('propertiesGrid');
+  const filtered = getFiltered();
+  document.getElementById('propCount').textContent = filtered.length;
+  grid.innerHTML = filtered.map(p => `
+    <div class="prop-card" onclick="openModal(${p.id})">
+      <div class="prop-img">
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prop-img-placeholder" style="display:none">${p.name[0]}</div>` : `<div class="prop-img-placeholder">${p.name[0]}</div>`}
+        <div class="prop-badges">
+          ${p.featured ? `<span class="prop-badge featured">${lang==='en'?'Featured':'Destacada'}</span>` : ''}
+          ${p.rating ? `<span class="prop-badge rating">★ ${p.rating}</span>` : `<span class="prop-badge">✨ ${lang==='en'?'New':'Nuevo'}</span>`}
+          ${p.cinema ? `<span class="prop-badge">🎬 Cinema</span>` : ''}
+          ${p.pool ? `<span class="prop-badge">🏊 Pool</span>` : ''}
+          ${p.jacuzzi && !p.pool ? `<span class="prop-badge">🛁 Jacuzzi</span>` : ''}
+        </div>
+        <button class="prop-fav" onclick="event.stopPropagation();this.classList.toggle('liked')">♡</button>
+      </div>
+      <div class="prop-info">
+        <div class="prop-zone">${p.zone}</div>
+        <div class="prop-name">${p.name}</div>
+        <div class="prop-features">
+          <div class="prop-feat"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>${p.guests} ${lang==='en'?'guests':'huéspedes'}</div>
+          <div class="prop-feat"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>${p.rooms} ${lang==='en'?'rooms':'habs'}</div>
+          <div class="prop-feat"><svg viewBox="0 0 24 24"><path d="M22 12H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>${p.bathrooms} ${lang==='en'?'baths':'baños'}</div>
+        </div>
+        <div class="prop-bottom">
+          <div class="prop-price">$${p.price.toLocaleString('en-US')} <span>${i18n[lang].per_night}</span></div>
+          <button class="prop-cta" onclick="event.stopPropagation();openWhatsApp('${p.name}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+            ${i18n[lang].btn_inquire}
+          </button>
+          <button class="prop-pdf-btn" onclick="event.stopPropagation();openPDF(${p.id})" title="${lang==='en'?'View PDF':'Ver PDF'}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function getFiltered() {
+  let result = [...properties];
+  const zone = document.getElementById('filterZone').value;
+  const guests = parseInt(document.getElementById('filterGuests').value);
+  const type = document.getElementById('filterType').value;
+  const sort = document.getElementById('filterSort').value;
+  if (zone !== 'all') result = result.filter(p => p.zone === zone);
+  if (guests > 0) result = result.filter(p => p.guests >= guests);
+  if (type !== 'all') result = result.filter(p => p.type === type);
+  if (sort === 'price-low') result.sort((a,b) => a.price - b.price);
+  else if (sort === 'price-high') result.sort((a,b) => b.price - a.price);
+  else if (sort === 'capacity') result.sort((a,b) => b.guests - a.guests);
+  else result.sort((a,b) => (b.featured?1:0) - (a.featured?1:0));
+  return result;
+}
+function filterProperties() { renderProperties(); }
+
+function openPDF(id) {
+  const p = properties.find(x => x.id === id);
+  if (!p) return;
+  const file = pdfFiles[id];
+  if (!file) return;
+
+  // Móvil → abrir en nueva pestaña. Desktop → modal con iframe
+  const isMobile = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
+  if (isMobile) {
+    window.open(file, '_blank');
+    return;
+  }
+
+  // Desktop: modal viewer
+  document.getElementById('pdfViewerFrame').src = file;
+  document.getElementById('pdfViewerTitle').textContent = p.name;
+  document.getElementById('pdfDownloadText').textContent = lang==='en' ? 'Download' : 'Descargar';
+  document.getElementById('pdfViewerDownload').onclick = function(){ downloadPDF(id); };
+  document.getElementById('pdfViewerNewTab').onclick = function(){ window.open(file, '_blank'); };
+  document.getElementById('pdfViewerWA').onclick = function(){ openWhatsApp(p.name); };
+  document.getElementById('pdfViewerOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePDFViewer(e) {
+  if (e && e.target.id !== 'pdfViewerOverlay' && !e.target.classList.contains('pdf-viewer-close')) return;
+  document.getElementById('pdfViewerOverlay').classList.remove('open');
+  document.getElementById('pdfViewerFrame').src = '';
+  document.body.style.overflow = '';
+}
+
+function downloadPDF(id) {
+  // Usa el iframe del viewer si está abierto, sino abre en nueva tab
+  const frame = document.getElementById('pdfViewerFrame');
+  if (frame && frame.src && frame.contentWindow) {
+    try {
+      frame.contentWindow.focus();
+      frame.contentWindow.print();
+      return;
+    } catch(e) {}
+  }
+  const file = pdfFiles[id];
+  const win = window.open(file, '_blank');
+  if (win) {
+    win.addEventListener('load', function(){ setTimeout(()=> win.print(), 500); });
+  }
+}
+
+function openModal(id) {
+  const p = properties.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modalImg').innerHTML = p.img
+    ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:20px 20px 0 0">`
+    : `<span style="font-size:64px">${p.name[0]}</span>`;
+  document.getElementById('modalZone').textContent = p.zone;
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalDesc').textContent = lang==='en' ? p.desc_en : p.desc_es;
+  document.getElementById('modalAmenities').innerHTML = p.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('');
+  document.getElementById('modalPdfBtn').onclick = function(){ openPDF(p.id); };
+  document.getElementById('modalPdfText').textContent = lang==='en' ? 'View Full PDF' : 'Ver PDF Completo';
+  document.getElementById('modalDetails').innerHTML = `
+    <div class="detail-item"><div class="detail-label">${lang==='en'?'Guests':'Huéspedes'}</div><div class="detail-value">${p.guests}</div></div>
+    <div class="detail-item"><div class="detail-label">${lang==='en'?'Bedrooms':'Habitaciones'}</div><div class="detail-value">${p.rooms}</div></div>
+    <div class="detail-item"><div class="detail-label">${lang==='en'?'Bathrooms':'Baños'}</div><div class="detail-value">${p.bathrooms}</div></div>
+    <div class="detail-item"><div class="detail-label">${lang==='en'?'Price/Night':'Precio/Noche'}</div><div class="detail-value">$${p.price.toLocaleString('en-US')} USD</div></div>
+    ${p.cinema?`<div class="detail-item"><div class="detail-label">Cinema</div><div class="detail-value">🎬 100" Projector</div></div>`:''}
+    ${p.pool?`<div class="detail-item"><div class="detail-label">Pool</div><div class="detail-value">🏊 ${lang==='en'?'Private Pool':'Piscina Privada'}</div></div>`:''}
+    ${p.jacuzzi?`<div class="detail-item"><div class="detail-label">Jacuzzi</div><div class="detail-value">🛁 ${lang==='en'?'Private Jacuzzi':'Jacuzzi Privado'}</div></div>`:''}
+    ${p.airbnb?`<div class="detail-item"><div class="detail-label">Airbnb</div><div class="detail-value"><a href="${p.airbnb}" target="_blank" style="color:var(--accent);text-decoration:none;font-size:13px">${lang==='en'?'View on Airbnb →':'Ver en Airbnb →'}</a></div></div>`:''}
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay') && e.target !== document.querySelector('.modal-close')) return;
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openWhatsApp(propertyName) {
+  const phone = '573007139578'; // WhatsApp Manila House — Andrés Felipe
+  let msg = i18n[lang].wa_msg;
+  if (propertyName) msg = (lang==='en'
+    ? `Hi! I'm interested in "${propertyName}" at Manila House. Is it available?`
+    : `¡Hola! Estoy interesado en "${propertyName}" de Manila House. ¿Está disponible?`);
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+renderProperties();
+</script>
+</body>
+</html>
